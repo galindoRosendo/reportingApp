@@ -69,9 +69,11 @@ $("#leftside").hide();
 $(document).ajaxStart(function(){
     $("#loadingcontainer").css("display", "block");
     $("#leftside").css("display", "none");
+    $("#resultset").css("display", "none");
 });
 $(document).ajaxComplete(function(){
     $("#loadingcontainer").css("display", "none");
+    $("#resultset").css("display", "block");
     $("#leftside").css("display", "block");
 });
 $(document).ready(function(){
