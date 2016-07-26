@@ -33,7 +33,7 @@ session_start();
     <div id=navbar>
       <ul>
         <li><a href="index.php" class="active" id="linkhome"><i class="fa fa-home" aria-hidden="true"></i> Home </a></li>
-        <li><a href="query.php" id="linkconsulta"><i class="fa fa-search" aria-hidden="true"></i> Consulta </a></li>
+        <li><a href="search.php" id="linkconsulta"><i class="fa fa-search" aria-hidden="true"></i> Consulta </a></li>
         <?php echo $nav ?>
 
       </ul>

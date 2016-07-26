@@ -23,7 +23,7 @@ echo "<div id='queryForm' class='formi'>
 </div><!--logInForm-->
 <div id='leftside'>
   <div>
-  <a href='php/reporte.php'><input type='button' name='btnExportar' value='Exportar a Excel' id='btnExportar'></a>
+  <a id='linkReporte'><input type='button' name='btnExportar' value='Exportar a Excel' id='btnExportar'></a>
   </div>
 </div>
 ";
@@ -60,8 +60,10 @@ function muestra(){
   var cmbSelect = document.getElementById("cmbFecha");
   if (cmbSelect.value=="range") {
     $("#optrange").show();
+    $("#linkReporte").attr("href", "php/range.php");
   }else {
     $("#optrange").hide();
+      $("#linkReporte").attr("href", "php/reporteDia.php");
   }
 }
 $("#loadingcontainer").hide();
@@ -78,20 +80,33 @@ $(document).ajaxComplete(function(){
 });
 $(document).ready(function(){
 $("#btnSubmit").click(function(){
-	var fechainicio = document.getElementById("optone").value;
+  var tipoBusqueda = document.getElementById("cmbFecha").value;
+  var fechainicio = document.getElementById("optone").value;
   var fechafin = document.getElementById("optrange").value;
   var parametros = {
     'fechainicio':fechainicio,
     'fechafin':fechafin
   };
+  if (tipoBusqueda=='oneday') {
     $.ajax({
     		data: parametros,
-    		url: "http://localhost:8080/reporting.es/php/query.php",
+    		url: "http://localhost:8080/reporting.es/php/oneday.php",
     		type:'POST',
     		success: function(result){
         $("#resultset").html(result);
     }
 			});
+  }else if (tipoBusqueda=='range') {
+    $.ajax({
+    		data: parametros,
+    		url: "http://localhost:8080/reporting.es/php/range.php",
+    		type:'POST',
+    		success: function(result){
+        $("#resultset").html(result);
+    }
+			});
+  }
+
 });
 });
 </script>
