@@ -18,14 +18,23 @@ echo "<div id='queryForm' class='formi'>
     <input id='optrange' type='text' name='txtfechafin' value='' placeholder='Fecha Fin AAAA-MM-DD' autocomplete='off'>
 
     <input type='button' name='btnSubmit' value='Consultar' id='btnSubmit'>
-  </form>
 
-</div><!--logInForm-->";
- }else {
-echo "<div class='formi' >
-<div class='warning'>
-<h1><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Debe estar registrado </h1>
+  </form>
+</div><!--logInForm-->
+<div id='leftside'>
+  <div>
+  <a href='php/reporte.php'><input type='button' name='btnExportar' value='Exportar a Excel' id='btnExportar'></a>
+  </div>
 </div>
+";
+ }else {
+echo "
+<div class='contentcenter'>
+  <div class='formi' >
+    <div class='warning'>
+      <h1><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Debe estar registrado </h1>
+    </div>
+  </div>
 </div>";
  }
   ?>
@@ -56,11 +65,14 @@ function muestra(){
   }
 }
 $("#loadingcontainer").hide();
+$("#leftside").hide();
 $(document).ajaxStart(function(){
     $("#loadingcontainer").css("display", "block");
+    $("#leftside").css("display", "none");
 });
 $(document).ajaxComplete(function(){
     $("#loadingcontainer").css("display", "none");
+    $("#leftside").css("display", "block");
 });
 $(document).ready(function(){
 $("#btnSubmit").click(function(){

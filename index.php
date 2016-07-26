@@ -1,17 +1,25 @@
 <?php
 include("php/header.php");
 ?>
-
-<div id="container" class="formi">
-<div class="">
-  <h1>Consulta de Ventas</h1>
-  <p>
-    Página para analisis y consulta de ventas.
-  </p>
-</div>
-
-
-</div><!--container-->
+<div class="contentcenter">
+  <div class="formi">
+    <div >
+      <h1>Consulta de Ventas</h1>
+      <p>
+        Página para analisis y consulta de ventas.
+      </p>
+      <p>
+        <i class="fa fa-database fa-5x" aria-hidden="true" ></i>
+      </p>
+      <p>
+        <i class="fa fa-area-chart fa-5x" aria-hidden="true" ></i>
+      </p>
+      <p>
+        <i class="fa fa-table fa-5x" aria-hidden="true" ></i>
+      </p>
+    </div>
+  </div><!--formi-->
+</div><!--contentcenter-->
 
 <?php
 include("php/footer.php");

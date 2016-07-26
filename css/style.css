@@ -94,6 +94,37 @@ tr:nth-child(even){
   background-color: #f2f2f2
 }
 
+/*Content center*/
+.contentcenter {
+  text-align: center;
+}
+
+.contentcenter div{
+  width: 50%;
+  margin: 0 auto;
+  text-align: center
+}
+
+#leftside {
+  text-align: center;
+}
+
+#leftside div{
+  width: 50%;
+  margin: 0 auto;
+  text-align: left;
+}
+#leftside input[type=button] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 /*loading*/
 
 #loadingcontainer {

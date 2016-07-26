@@ -1,8 +1,10 @@
 <?php
 include("dbCredentials.php");
+session_start();
 $fecha = $_POST['fechainicio'];
 $fechafin = $_POST['fechafin'];
-
+$_SESSION['fechainicio']=$fecha;
+$_SESSION['fechafin']=$fechafin;
 // Conexion
 $conn = new mysqli(NOMBRE_HOSTMKT, USUARIOMKT,CONTRASENAMKT,BASE_DE_DATOSMKT);
 // Ver si no hay error
