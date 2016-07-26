@@ -54,6 +54,10 @@ else {
 
   </div><!--regDiv-->
 
+<script type="text/javascript">
+$( "#linkhome" ).removeClass( "active" );
+$( "#linkuser" ).addClass( "active" );
+</script>
 
 
  <?php

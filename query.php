@@ -13,25 +13,40 @@ echo "<div id='queryForm' class='formi'>
       <option value='oneday'>Dia</option>
     </select>
 
-    <input id='optone' type='text' name='txtfecha' value='' placeholder='Fecha AAAA-MM-DD'>
+    <input id='optone' type='text' name='txtfecha' value='' placeholder='Fecha AAAA-MM-DD' autocomplete='off'>
 
-    <input id='optrange' type='text' name='txtfechafin' value='' placeholder='Fecha Fin AAAA-MM-DD'>
+    <input id='optrange' type='text' name='txtfechafin' value='' placeholder='Fecha Fin AAAA-MM-DD' autocomplete='off'>
 
     <input type='button' name='btnSubmit' value='Consultar' id='btnSubmit'>
   </form>
 
 </div><!--logInForm-->";
  }else {
-echo "<div class='formi' ><h1>Debe estar registrado</h1> </div>";
+echo "<div class='formi' >
+<div class='warning'>
+<h1><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Debe estar registrado </h1>
+</div>
+</div>";
  }
   ?>
 
-
-
+<div id="loadingcontainer" >
+    <div >
+      <i class="fa fa-cog fa-spin fa-3x fa-fw"></i> <h3>Loading...</h3>
+    </div>
+</div>
   <div class="formi" id="resultset">
 
   </div>
 <script type="text/javascript">
+$( "#linkhome" ).removeClass( "active" );
+$( "#linkconsulta" ).addClass( "active" );
+
+$( function() {
+  $( "#optone" ).datepicker({ dateFormat: "yy-mm-dd" });
+  $( "#optrange" ).datepicker({ dateFormat: "yy-mm-dd" });
+} );
+
 function muestra(){
   var cmbSelect = document.getElementById("cmbFecha");
   if (cmbSelect.value=="range") {
@@ -40,7 +55,13 @@ function muestra(){
     $("#optrange").hide();
   }
 }
-
+$("#loadingcontainer").hide();
+$(document).ajaxStart(function(){
+    $("#loadingcontainer").css("display", "block");
+});
+$(document).ajaxComplete(function(){
+    $("#loadingcontainer").css("display", "none");
+});
 $(document).ready(function(){
 $("#btnSubmit").click(function(){
 	var fechainicio = document.getElementById("optone").value;

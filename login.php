@@ -46,6 +46,10 @@ if(isset($_POST["email"])){
   </form>
 
 </div><!--logInForm-->
+<script type="text/javascript">
+$( "#linkhome" ).removeClass( "active" );
+$( "#linkuser" ).addClass( "active" );
+</script>
 
 
 <?php

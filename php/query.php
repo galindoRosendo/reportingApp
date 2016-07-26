@@ -32,6 +32,7 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         echo "<tr><td>".$row["sucursales"]."</td><td>".$row["7DIAS"]."</td><td>".$row["6DIAS"]."</td><td>".$row["5DIAS"]."</td><td>".$row["4DIAS"]."</td><td>".$row["3DIAS"]."</td><td>".$row["2DIAS"]."</td><td>".$row["1DIAS"];
     }
+    echo "</table>";
 } else {
     echo "0 results";
 }
