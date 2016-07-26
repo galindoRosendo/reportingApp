@@ -21,7 +21,7 @@ $sql = "select
     SUM(CASE WHEN DOB = ( '$fecha' - INTERVAL 1 DAY )  THEN ROUND((gnditem5.price/1.16), 2) ELSE 0 END) '1DIAS'
     from sucursales
     left join gnditem5 on gnditem5.unit=sucursales.unit
-    where DOB >= ( CURDATE() - INTERVAL 7 DAY )
+    where DOB >= ( '$fecha' - INTERVAL 7 DAY )
     group by sucursal
     ORDER BY FIELD(sucursales, 'ldo1','ldo2','ldo3','ldo5','ldo6','ldo7','ldo8','REY1','REY2','REY3','REY4','REY5','REY6','REY7','REY8','MAT1','MAT2','MAT3','MAT4','MAT6','MAT7','JRZ3','JRZ4','JRZ6','JRZ8','JRZ9','mal1','rbr1','png1')";
 $result = $conn->query($sql);
@@ -36,15 +36,15 @@ if ($result->num_rows > 0) {
 
    $objPHPExcel->getDefaultStyle()->getFont()->setSize(10);
    //Informacion del excel
-   $objPHPExcel->getProperties()->setCreator("Codedrinks") // Nombre del autor
-    ->setLastModifiedBy("Codedrinks") //Ultimo usuario que lo modificó
-    ->setTitle("Reporte Excel con PHP y MySQL") // Titulo
-    ->setSubject("Reporte Excel con PHP y MySQL") //Asunto
-    ->setDescription("Reporte de alumnos") //Descripción
-    ->setKeywords("reporte alumnos carreras") //Etiquetas
+   $objPHPExcel->getProperties()->setCreator("Dival") // Nombre del autor
+    ->setLastModifiedBy("Dival") //Ultimo usuario que lo modificó
+    ->setTitle("Reporte de Ventas") // Titulo
+    ->setSubject("Reporte Excel") //Asunto
+    ->setDescription("Reporte de Ventas") //Descripción
+    ->setKeywords("reporte ventas excel") //Etiquetas
     ->setCategory("Reporte excel"); //Categorias
 
-    $tituloReporte = "Reporte ventas";
+    $tituloReporte = "Reporte de Ventas";
     $titulosColumnas = array('Sucursales','7Dias','6Dias','5Dias','4Dias','3Dias','2Dias','1Dia');
 
     // Se combinan las celdas A1 hasta D1, para colocar ahí el titulo del reporte
@@ -84,13 +84,13 @@ if ($result->num_rows > 0) {
         'strike'    => false,
         'size' =>16,
         'color'     => array(
-            'rgb' => 'FFFFFF'
+            'rgb' => '000000'
         )
     ),
     'fill' => array(
       'type'  => PHPExcel_Style_Fill::FILL_SOLID,
       'color' => array(
-            'argb' => 'FF220835')
+            'argb' => 'FFFFFFFF')
   ),
     'borders' => array(
         'allborders' => array(
@@ -110,30 +110,20 @@ $estiloTituloColumnas = array(
         'name'  => 'Arial',
         'bold'  => true,
         'color' => array(
-            'rgb' => 'FFFFFF'
-        )
-    ),
-    'fill' => array(
-        'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
-  'rotation'   => 90,
-        'startcolor' => array(
-            'rgb' => 'c47cf2'
-        ),
-        'endcolor' => array(
-            'argb' => 'FF431a5d'
+            'rgb' => '000000'
         )
     ),
     'borders' => array(
         'top' => array(
             'style' => PHPExcel_Style_Border::BORDER_MEDIUM ,
             'color' => array(
-                'rgb' => '143860'
+                'rgb' => '000000'
             )
         ),
         'bottom' => array(
             'style' => PHPExcel_Style_Border::BORDER_MEDIUM ,
             'color' => array(
-                'rgb' => '143860'
+                'rgb' => '000000'
             )
         )
     ),
@@ -152,16 +142,11 @@ $estiloInformacion->applyFromArray( array(
             'rgb' => '000000'
         )
     ),
-    'fill' => array(
-  'type'  => PHPExcel_Style_Fill::FILL_SOLID,
-  'color' => array(
-            'argb' => 'FFd9b7f4')
-  ),
     'borders' => array(
         'left' => array(
             'style' => PHPExcel_Style_Border::BORDER_THIN ,
       'color' => array(
-              'rgb' => '3a2a47'
+              'rgb' => '000000'
             )
         )
     )

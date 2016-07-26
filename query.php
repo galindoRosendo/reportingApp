@@ -86,7 +86,7 @@ $("#btnSubmit").click(function(){
   };
     $.ajax({
     		data: parametros,
-    		url: "http://localhost/reporting.es/php/query.php",
+    		url: "http://localhost:8080/reporting.es/php/query.php",
     		type:'POST',
     		success: function(result){
         $("#resultset").html(result);
