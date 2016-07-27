@@ -10,7 +10,11 @@ $_SESSION['fechaFin']=$fechaFin;
 $conn = new mysqli(NOMBRE_HOSTMKT, USUARIOMKT,CONTRASENAMKT,BASE_DE_DATOSMKT);
 // Ver si no hay error
 if ($conn->connect_error) {
-    die("Error de conexion: " . $conn->connect_error);
+  die("<div class='formi'>
+        <div class='error'>
+          <h3>Error de conexion: ". $conn->connect_error."</h3>
+        </div>
+      </div>");
 }
 
 $sql = queryRange($fecha,$fechaFin);
@@ -26,7 +30,11 @@ if ($result->num_rows > 0) {
     }
     echo "</table>";
 } else {
-    echo "0 resultados";
+  echo "<div class='formi'>
+  <div class='info'>
+    <h3>0 resultados</h3>
+  </div>
+</div>";
 }
 $conn->close();
  ?>

@@ -49,69 +49,7 @@ echo "
   <div class="formi" id="resultset">
 
   </div>
-<script type="text/javascript">
-$("#linkhome").removeClass( "active" );
-$("#linkconsulta").addClass( "active" );
-$("#loadingcontainer").hide();
-$("#rightside").hide();
-$("#optrange").hide();
-$( function() {
-  $( "#optone" ).datepicker({ dateFormat: "yy-mm-dd" });
-  $( "#optrange" ).datepicker({ dateFormat: "yy-mm-dd" });
-} );
-
-function muestra(){
-  var cmbSelect = document.getElementById("cmbFecha");
-  if (cmbSelect.value=="range") {
-    $("#optrange").toggle(500);
-    $("#linkReporte").attr("href", "php/files/reporteRango.php");
-  }else {
-    $("#optrange").toggle(500);
-      $("#linkReporte").attr("href", "php/files/reporteDia.php");
-  }
-}
-$(document).ajaxStart(function(){
-    $("#loadingcontainer").css("display", "block");
-    $("#rightside").css("display", "none");
-    $("#resultset").css("display", "none");
-});
-$(document).ajaxComplete(function(){
-    $("#loadingcontainer").css("display", "none");
-    $("#resultset").css("display", "block");
-    $("#rightside").css("display", "block");
-});
-$(document).ready(function(){
-$("#btnSubmit").click(function(){
-  var tipoBusqueda = document.getElementById("cmbFecha").value;
-  var fechainicio = document.getElementById("optone").value;
-  var fechafin = document.getElementById("optrange").value;
-  var parametros = {
-    'fechaA':fechainicio,
-    'fechaFin':fechafin
-  };
-  if (tipoBusqueda=='oneday') {
-    $.ajax({
-    		data: parametros,
-    		url: "http://localhost:8080/reporting.es/php/ajax/oneday.php",
-    		type:'POST',
-    		success: function(result){
-        $("#resultset").html(result);
-    }
-			});
-  }else if (tipoBusqueda=='range') {
-    $.ajax({
-    		data: parametros,
-    		url: "http://localhost:8080/reporting.es/php/ajax/range.php",
-    		type:'POST',
-    		success: function(result){
-        $("#resultset").html(result);
-    }
-			});
-  }
-
-});
-});
-</script>
+<script type="text/javascript" src="js/search.js"></script>
  <?php
 include("php/com/footer.php");
   ?>
