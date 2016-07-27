@@ -51,7 +51,7 @@ input[type=text], input[type=password], label,select {
 
 
 input[type=submit],input[type=button] {
-    width: 100%;
+    width: 50%;
     background-color: #FFCC11;
     color: white;
     padding: 14px 20px;
@@ -66,6 +66,7 @@ input[type=submit]:hover {
 }
 
 div.formi {
+    text-align: center;
     border-radius: 5px;
     background-color: #FFF;
     padding: 20px;
@@ -105,8 +106,9 @@ tr:nth-child(even){
   text-align: center
 }
 
+
 #leftside {
-  text-align: center;
+  text-align: left;
 }
 
 #rightside div{

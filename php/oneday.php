@@ -18,7 +18,8 @@ $sql = queryOneDay($fecha,$fechaAA);
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // salida
-    echo "<table><th>Sucursal</th><th>Transacciones</th><th>Año Pasado</th><th>Venta</th><th>Año Pasado</th><th>Ticket Promedio</th><th>Año Pasado</th><th>Variacion Venta</th><th>Variacion V %</th><th>Variacion Transacciones</th><th>Variacion T %</th><th>Variacion Ticket Promedio</th><th>Variacion TP %</th>";
+    echo " <h2 style='text-align: left;'>Reporte de $fecha</h2>
+    <table><th>Sucursal</th><th>Transacciones</th><th>Año Pasado</th><th>Venta</th><th>Año Pasado</th><th>Ticket Promedio</th><th>Año Pasado</th><th>Variacion Venta</th><th>Variacion V %</th><th>Variacion Transacciones</th><th>Variacion T %</th><th>Variacion Ticket Promedio</th><th>Variacion TP %</th>";
     while($row = $result->fetch_assoc()) {
         echo "<tr><td>".$row['sucursal']."</td><td>".$row['Transacciones']."</td><td>".$row['TransaccionesAA']."</td><td>".$row['Venta']."</td><td>".$row['VentaAA']."</td><td>".$row['TicketPromedio']."</td><td>".$row['TicketPromedioAA']."</td>";
         echo "<td>".$row['VariacionVenta$']."</td><td>".$row['VariacionVenta%']."</td><td>".$row['VariacionTransacciones']."</td><td>".$row['VariacionTransacciones%']."</td><td>".$row['VariacionTicket']."</td><td>".$row['VariacionTicket%']."</td></tr>";
