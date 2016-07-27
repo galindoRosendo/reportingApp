@@ -9,8 +9,8 @@ echo "<div id='queryForm' class='formi'>
   <form class='' action='query.php' method='post'>
 
     <select id='cmbFecha' class='selec' name='typeDate' onchange='muestra()''>
-      <option value='range'>Rango</option>
       <option value='oneday'>Dia</option>
+      <option value='range'>Rango</option>
     </select>
 
     <input id='optone' type='text' name='txtfecha' value='' placeholder='Fecha AAAA-MM-DD' autocomplete='off'>
@@ -21,10 +21,11 @@ echo "<div id='queryForm' class='formi'>
 
   </form>
 </div><!--logInForm-->
-<div id='leftside'>
-  <div>
-  <a id='linkReporte'><input type='button' name='btnExportar' value='Exportar a Excel' id='btnExportar'></a>
+<div id='rightside'>
+  <a href='php/reporteDia.php' id='linkReporte'><i class='fa fa-file-excel-o fa-2x' aria-hidden='true'><div>
+  </i> Exportar a Excel
   </div>
+  </a>
 </div>
 ";
  }else {
@@ -48,9 +49,11 @@ echo "
 
   </div>
 <script type="text/javascript">
-$( "#linkhome" ).removeClass( "active" );
-$( "#linkconsulta" ).addClass( "active" );
-
+$("#linkhome").removeClass( "active" );
+$("#linkconsulta").addClass( "active" );
+$("#loadingcontainer").hide();
+$("#rightside").hide();
+$("#optrange").hide();
 $( function() {
   $( "#optone" ).datepicker({ dateFormat: "yy-mm-dd" });
   $( "#optrange" ).datepicker({ dateFormat: "yy-mm-dd" });
@@ -59,24 +62,22 @@ $( function() {
 function muestra(){
   var cmbSelect = document.getElementById("cmbFecha");
   if (cmbSelect.value=="range") {
-    $("#optrange").show();
-    $("#linkReporte").attr("href", "php/range.php");
+    $("#optrange").toggle(500);
+    $("#linkReporte").attr("href", "php/reporteRango.php");
   }else {
-    $("#optrange").hide();
+    $("#optrange").toggle(500);
       $("#linkReporte").attr("href", "php/reporteDia.php");
   }
 }
-$("#loadingcontainer").hide();
-$("#leftside").hide();
 $(document).ajaxStart(function(){
     $("#loadingcontainer").css("display", "block");
-    $("#leftside").css("display", "none");
+    $("#rightside").css("display", "none");
     $("#resultset").css("display", "none");
 });
 $(document).ajaxComplete(function(){
     $("#loadingcontainer").css("display", "none");
     $("#resultset").css("display", "block");
-    $("#leftside").css("display", "block");
+    $("#rightside").css("display", "block");
 });
 $(document).ready(function(){
 $("#btnSubmit").click(function(){
@@ -84,8 +85,8 @@ $("#btnSubmit").click(function(){
   var fechainicio = document.getElementById("optone").value;
   var fechafin = document.getElementById("optrange").value;
   var parametros = {
-    'fechainicio':fechainicio,
-    'fechafin':fechafin
+    'fechaA':fechainicio,
+    'fechaFin':fechafin
   };
   if (tipoBusqueda=='oneday') {
     $.ajax({
