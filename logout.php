@@ -1,5 +1,5 @@
 <?php
-include("php/header.php");
+include("php/com/header.php");
  ?>
 
 <?php
@@ -9,5 +9,5 @@ header("Location: index.php");
  ?>
 
  <?php
-include("php/footer.php");
+include("php/com/footer.php");
   ?>

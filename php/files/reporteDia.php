@@ -1,9 +1,9 @@
 <?php
-require_once('dbCredentials.php');
-include("querys.php");
+include("../sql/dbCredentials.php");
+include("../sql/querys.php");
 session_start();
 $fecha=$_SESSION['fechaA'];
-$fechaFin=$_SESSION['fechaFin'];
+$fechaAA=$_SESSION['fechaAA'];
 // Conexion
 $conn = new mysqli(NOMBRE_HOSTMKT, USUARIOMKT,CONTRASENAMKT,BASE_DE_DATOSMKT);
 // Ver si no hay error
@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     die("Error de conexion: " . $conn->connect_error);
 }
 
-$sql = queryRange($fecha,$fechaFin);
+$sql = queryOneDay($fecha,$fechaAA);
 
 $result = $conn->query($sql);
 
@@ -19,7 +19,7 @@ $conn->close();
 
 if ($result->num_rows > 0) {
   date_default_timezone_set('America/Mexico_City');
-   require_once 'Classes/PHPExcel.php';
+   require_once '../Classes/PHPExcel.php';
    $objPHPExcel = new PHPExcel();
    $objPHPExcel->getDefaultStyle()->getFont()->setName('Arial');
 
@@ -33,12 +33,12 @@ if ($result->num_rows > 0) {
     ->setKeywords("reporte ventas excel") //Etiquetas
     ->setCategory("Reporte excel"); //Categorias
 
-    $tituloReporte = "Reporte de Ventas por Rango";
-    $titulosColumnas = array('Sucursal','Fecha','Fecha Anterior','Transacciones','Transacciones AA','Venta','Venta AA','Ticket Promedio','TP AA','Variacion Venta $','Variacion Venta %','Variacion Transacciones','Variacion Tr %','Variacion TP','Variacion TP %');
+    $tituloReporte = "Reporte de Ventas por Dia";
+    $titulosColumnas = array('Sucursal','Transacciones','Transacciones AA','Venta','Venta AA','Ticket Promedio','TP AA','Variacion Venta $','Variacion Venta %','Variacion Transacciones','Variacion Tr %','Variacion TP','Variacion TP %');
 
     // Se combinan las celdas A1 hasta D1, para colocar ahí el titulo del reporte
     $objPHPExcel->setActiveSheetIndex(0)
-    ->mergeCells('A1:O1');
+    ->mergeCells('A1:M1');
 
     // Se agregan los titulos del reporte
     $objPHPExcel->setActiveSheetIndex(0)
@@ -55,34 +55,28 @@ if ($result->num_rows > 0) {
     ->setCellValue('J3',  $titulosColumnas[9])
     ->setCellValue('K3',  $titulosColumnas[10])
     ->setCellValue('L3',  $titulosColumnas[11])
-    ->setCellValue('M3',  $titulosColumnas[12])
-    ->setCellValue('N3',  $titulosColumnas[13])
-    ->setCellValue('O3',  $titulosColumnas[14]);
+    ->setCellValue('M3',  $titulosColumnas[12]);
 
     $objPHPExcel->setActiveSheetIndex(0)
         ->setCellValue('A'.'2', 'Fecha:')
-        ->setCellValue('B'.'2', $fecha)
-        ->setCellValue('C'.'2', 'A:')
-        ->setCellValue('D'.'2', $fechaFin);
+        ->setCellValue('B'.'2', $fecha);
 
     $i = 4; //Numero de fila donde se va a comenzar a rellenar
     while ($fila = $result->fetch_array()) {
      $objPHPExcel->setActiveSheetIndex(0)
          ->setCellValue('A'.$i, $fila['sucursal'])
-         ->setCellValue('B'.$i, $fila['Fecha'])
-         ->setCellValue('C'.$i, $fila['FechaAA'])
-         ->setCellValue('D'.$i, $fila['Transacciones'])
-         ->setCellValue('E'.$i, $fila['TransaccionesAA'])
-         ->setCellValue('F'.$i, $fila['Venta'])
-         ->setCellValue('G'.$i, $fila['VentaAA'])
-         ->setCellValue('H'.$i, $fila['TicketPromedio'])
-         ->setCellValue('I'.$i, $fila['TicketPromedioAA'])
-         ->setCellValue('J'.$i, $fila['VariacionVenta$'])
-         ->setCellValue('K'.$i, $fila['VariacionVenta%'])
-         ->setCellValue('L'.$i, $fila['VariacionTransacciones'])
-         ->setCellValue('M'.$i, $fila['VariacionTransacciones%'])
-         ->setCellValue('N'.$i, $fila['VariacionTicket'])
-         ->setCellValue('O'.$i, $fila['VariacionTicket%']);
+         ->setCellValue('B'.$i, $fila['Transacciones'])
+         ->setCellValue('C'.$i, $fila['TransaccionesAA'])
+         ->setCellValue('D'.$i, $fila['Venta'])
+         ->setCellValue('E'.$i, $fila['VentaAA'])
+         ->setCellValue('F'.$i, $fila['TicketPromedio'])
+         ->setCellValue('G'.$i, $fila['TicketPromedioAA'])
+         ->setCellValue('H'.$i, $fila['VariacionVenta$'])
+         ->setCellValue('I'.$i, $fila['VariacionVenta%'])
+         ->setCellValue('J'.$i, $fila['VariacionTransacciones'])
+         ->setCellValue('K'.$i, $fila['VariacionTransacciones%'])
+         ->setCellValue('L'.$i, $fila['VariacionTicket'])
+         ->setCellValue('M'.$i, $fila['VariacionTicket%']);
      $i++;
  }
  $estiloTituloReporte = array(
@@ -160,15 +154,15 @@ $estiloInformacion->applyFromArray( array(
         )
     )
 ));
-$objPHPExcel->getActiveSheet()->getStyle('A1:O1')->applyFromArray($estiloTituloReporte);
-$objPHPExcel->getActiveSheet()->getStyle('A3:O3')->applyFromArray($estiloTituloColumnas);
-$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A4:O".($i-1));
-for($i = 'A'; $i <= 'O'; $i++){
+$objPHPExcel->getActiveSheet()->getStyle('A1:M1')->applyFromArray($estiloTituloReporte);
+$objPHPExcel->getActiveSheet()->getStyle('A3:M3')->applyFromArray($estiloTituloColumnas);
+$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A4:M".($i-1));
+for($i = 'A'; $i <= 'M'; $i++){
     $objPHPExcel->setActiveSheetIndex(0)->getColumnDimension($i)->setAutoSize(TRUE);
 }
 
 // Se asigna el nombre a la hoja
-$objPHPExcel->getActiveSheet()->setTitle('Reporte'.$fecha.'-'.$fechaFin);
+$objPHPExcel->getActiveSheet()->setTitle('Reporte'.$fecha);
 
 // Se activa la hoja para que sea la que se muestre cuando el archivo se abre
 $objPHPExcel->setActiveSheetIndex(0);
@@ -176,7 +170,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 
 // Se manda el archivo al navegador web, con el nombre que se indica, en formato 2007
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header("Content-Disposition: attachment;filename='Reporte".$fecha.'-'.$fechaFin.".xlsx'");
+header("Content-Disposition: attachment;filename='Reporte".$fecha.".xlsx'");
 header('Cache-Control: max-age=0');
 
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');

@@ -1,6 +1,6 @@
 <?php
-include("dbCredentials.php");
-include("querys.php");
+include("../sql/dbCredentials.php");
+include("../sql/querys.php");
 session_start();
 $fecha = $_POST['fechaA'];
 $fechaAA = '2015-07-25';

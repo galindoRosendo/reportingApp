@@ -1,6 +1,6 @@
 <?php
-include("php/header.php");
-include_once("php/dbCredentials.php");
+include("php/com/header.php");
+include_once("php/sql/dbCredentials.php");
  ?>
 
  <?php
@@ -61,5 +61,5 @@ $( "#linkuser" ).addClass( "active" );
 
 
  <?php
-include("php/footer.php");
+include("php/com/footer.php");
   ?>

@@ -1,6 +1,6 @@
 <?php
-include("php/header.php");
-include("php/dbCredentials.php");
+include("php/com/header.php");
+include("php/sql/dbCredentials.php");
  ?>
 
  <?php
@@ -64,10 +64,10 @@ function muestra(){
   var cmbSelect = document.getElementById("cmbFecha");
   if (cmbSelect.value=="range") {
     $("#optrange").toggle(500);
-    $("#linkReporte").attr("href", "php/reporteRango.php");
+    $("#linkReporte").attr("href", "php/files/reporteRango.php");
   }else {
     $("#optrange").toggle(500);
-      $("#linkReporte").attr("href", "php/reporteDia.php");
+      $("#linkReporte").attr("href", "php/files/reporteDia.php");
   }
 }
 $(document).ajaxStart(function(){
@@ -92,7 +92,7 @@ $("#btnSubmit").click(function(){
   if (tipoBusqueda=='oneday') {
     $.ajax({
     		data: parametros,
-    		url: "http://localhost:8080/reporting.es/php/oneday.php",
+    		url: "http://localhost:8080/reporting.es/php/ajax/oneday.php",
     		type:'POST',
     		success: function(result){
         $("#resultset").html(result);
@@ -101,7 +101,7 @@ $("#btnSubmit").click(function(){
   }else if (tipoBusqueda=='range') {
     $.ajax({
     		data: parametros,
-    		url: "http://localhost:8080/reporting.es/php/range.php",
+    		url: "http://localhost:8080/reporting.es/php/ajax/range.php",
     		type:'POST',
     		success: function(result){
         $("#resultset").html(result);
@@ -113,5 +113,5 @@ $("#btnSubmit").click(function(){
 });
 </script>
  <?php
-include("php/footer.php");
+include("php/com/footer.php");
   ?>
