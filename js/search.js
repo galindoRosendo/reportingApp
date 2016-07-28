@@ -18,10 +18,10 @@ $( function() {
 function muestra(){
   var cmbSelect = document.getElementById("cmbFecha");
   if (cmbSelect.value=="range") {
-    $("#optrange").toggle(500);
+    $("#optrange").show(500);
     $("#linkReporte").attr("href", "php/files/reporteRango.php");
   }else {
-    $("#optrange").toggle(500);
+    $("#optrange").hide(500);
       $("#linkReporte").attr("href", "php/files/reporteDia.php");
   }
 }

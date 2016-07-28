@@ -22,7 +22,7 @@ echo "<div id='queryForm' class='formi'>
   </form>
 </div><!--logInForm-->
 <div id='rightside'>
-  <a href='php/reporteDia.php' id='linkReporte'><i class='fa fa-file-excel-o fa-2x' aria-hidden='true'>
+  <a href='php/files/reporteDia.php' id='linkReporte'><i class='fa fa-file-excel-o fa-2x' aria-hidden='true'>
   <div>
   </i> Exportar a Excel
   </div>
