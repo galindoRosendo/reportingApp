@@ -42,7 +42,11 @@ function queryOneDay($fecha,$fechaAA){
 function queryRange($fecha,$fechaFin){
   $fechaAA= strtotime("-1 year", strtotime($fecha));
   $fechaAA=date("Y-m-d", $fechaAA);
+  $fechaAA= strtotime("+2 day", strtotime($fechaAA));
+  $fechaAA=date("Y-m-d", $fechaAA);
   $fechaAAFin=strtotime("-1 year", strtotime($fechaFin));
+  $fechaAAFin=date("Y-m-d", $fechaAAFin);
+  $fechaAAFin= strtotime("+2 day", strtotime($fechaAAFin));
   $fechaAAFin=date("Y-m-d", $fechaAAFin);
 $sql = "SELECT
         	ACTUAL.sucursal,
@@ -64,6 +68,7 @@ $sql = "SELECT
         	(SELECT
         		sucursal as Sucursal,
         		date_format(dob, '%d/%m/%Y') as Fecha,
+                DAYOFMONTH(dob) as Dia,
         		count(distinct(chk)) as Transacciones,
         		sum(gnditem5.price)/1.16 as Venta,
         		(sum(gnditem5.price)/1.16)/(count(distinct(chk))) as 'TicketPromedio'
@@ -75,6 +80,7 @@ $sql = "SELECT
         	(SELECT
         		sucursal as Sucursal,
         		date_format(dob, '%d/%m/%Y') as FechaAA,
+                DAYOFMONTH(dob) as DiaAA,
         		count(distinct(chk)) as TransaccionesAA,
         		sum(gnditem5.price)/1.16 as VentaAA,
         		(sum(gnditem5.price)/1.16)/(count(distinct(chk))) as 'TicketPromedioAA'
@@ -82,6 +88,6 @@ $sql = "SELECT
         	JOIN  sucursales on sucursales.unit=gnditem5.unit
         	WHERE DOB BETWEEN '$fechaAA' AND '$fechaAAFin'
         	GROUP BY dob,sucursal
-        	ORDER BY dob,sucursal) AS PASADO ON (ACTUAL.sucursal = PASADO.sucursal);";
+        	ORDER BY dob,sucursal) AS PASADO ON (ACTUAL.sucursal = PASADO.sucursal) AND ((ACTUAL.Dia+2) = PASADO.DiaAA);";
   return $sql;
 }

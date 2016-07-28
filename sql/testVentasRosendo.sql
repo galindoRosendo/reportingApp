@@ -19,25 +19,27 @@ FROM
 	(SELECT
 		sucursal as Sucursal,
 		date_format(dob, "%d/%m/%Y") as Fecha,
+        DAYOFMONTH(dob) as Dia,
 		count(distinct(chk)) as Transacciones,
 		sum(gnditem5.price)/1.16 as Venta,
 		(sum(gnditem5.price)/1.16)/(count(distinct(chk))) as 'TicketPromedio'
 	FROM  gnditem5 LEFT
 	JOIN  sucursales on sucursales.unit=gnditem5.unit
-	WHERE DOB BETWEEN '2016-07-23' AND '2016-07-25'
+	WHERE DOB BETWEEN '2016-07-20' AND '2016-07-25'
 	GROUP BY dob,sucursal
 	ORDER BY dob,sucursal) AS ACTUAL JOIN
 	(SELECT
 		sucursal as Sucursal,
 		date_format(dob, "%d/%m/%Y") as FechaAA,
+        DAYOFMONTH(dob) as DiaAA,
 		count(distinct(chk)) as TransaccionesAA,
 		sum(gnditem5.price)/1.16 as VentaAA,
 		(sum(gnditem5.price)/1.16)/(count(distinct(chk))) as 'TicketPromedioAA'
 	FROM  gnditem5 LEFT
 	JOIN  sucursales on sucursales.unit=gnditem5.unit
-	WHERE DOB BETWEEN '2015-07-23' AND '2015-07-25'
+	WHERE DOB BETWEEN '2015-07-22' AND '2015-07-27'
 	GROUP BY dob,sucursal
-	ORDER BY dob,sucursal) AS PASADO ON (ACTUAL.sucursal = PASADO.sucursal);
+	ORDER BY dob,sucursal) AS PASADO ON (ACTUAL.sucursal = PASADO.sucursal) AND ((ACTUAL.Dia+2) = PASADO.DiaAA);
 
 #ondeDay
 SELECT 
