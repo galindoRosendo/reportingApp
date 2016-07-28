@@ -11,6 +11,7 @@ echo "<div id='queryForm' class='formi'>
     <select id='cmbFecha' class='selec' name='typeDate' onchange='muestra()''>
       <option value='oneday'>Dia</option>
       <option value='range'>Rango</option>
+      <option value='rangesum'>Rango Acumulado</option>
     </select>
 
     <input id='optone' type='text' name='txtfecha' value='' placeholder='Fecha AAAA-MM-DD' autocomplete='off'>

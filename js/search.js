@@ -20,9 +20,12 @@ function muestra(){
   if (cmbSelect.value=="range") {
     $("#optrange").show(500);
     $("#linkReporte").attr("href", "php/files/reporteRango.php");
-  }else {
+  }else if (cmbSelect.value=="oneday") {
     $("#optrange").hide(500);
-      $("#linkReporte").attr("href", "php/files/reporteDia.php");
+    $("#linkReporte").attr("href", "php/files/reporteDia.php");
+  }else if (cmbSelect.value=="rangesum") {
+      $("#optrange").show(500);
+      $("#linkReporte").attr("href", "php/files/reporteRangoSuma.php");
   }
 }
 
@@ -61,6 +64,15 @@ $("#btnSubmit").click(function(){
     $.ajax({
     		data: parametros,
     		url: "http://localhost:8080/reporting.es/php/ajax/range.php",
+    		type:'POST',
+    		success: function(result){
+        $("#resultset").html(result);
+    }
+			});
+  }else if (tipoBusqueda=='rangesum') {
+    $.ajax({
+    		data: parametros,
+    		url: "http://localhost:8080/reporting.es/php/ajax/rangeSum.php",
     		type:'POST',
     		success: function(result){
         $("#resultset").html(result);
