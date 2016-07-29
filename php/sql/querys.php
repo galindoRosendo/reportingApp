@@ -91,3 +91,10 @@ $sql = "SELECT
         	ORDER BY dob,sucursal) AS PASADO ON (ACTUAL.sucursal = PASADO.sucursal) AND ((ACTUAL.Dia+2) = PASADO.DiaAA);";
   return $sql;
 }
+
+function querySucursales(){
+  $sql = "SELECT sucursal
+          FROM sucursales;";
+
+    return $sql;
+}

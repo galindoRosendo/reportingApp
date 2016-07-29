@@ -6,9 +6,9 @@ include("php/sql/dbCredentials.php");
  <?php
  if(isset($_SESSION["user"])){
 echo "<div id='queryForm' class='formi'>
-  <form class='' action='query.php' method='post'>
+  <form class='' >
 
-    <select id='cmbFecha' class='selec' name='typeDate' onchange='muestra()''>
+    <select id='cmbFecha' class='selec' name='typeDate' onchange='muestra()'>
       <option value='oneday'>Dia</option>
       <option value='range'>Rango</option>
       <option value='rangesum'>Rango Acumulado</option>
