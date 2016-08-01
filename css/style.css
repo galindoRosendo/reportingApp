@@ -76,6 +76,34 @@ div.formi {
     padding: 20px;
 }
 
+/* Checkbox and checkboxlabels */
+label.chkhead {
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+    font-weight: 700;
+    text-align: left;
+}
+
+label {
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+    text-align: left;
+}
+
+input[type=checkbox] {
+    width: 13px;
+    height: 13px;
+    padding: 0;
+    margin:0;
+    vertical-align: bottom;
+    position: relative;
+    top: -1px;
+    *overflow: hidden;
+    text-align: left;
+}
+
 /* Tables */
 th {
     background-color: #FFCC11;

@@ -18,6 +18,25 @@ echo "<div id='queryForm' class='formi'>
 
     <input id='optrange' type='text' name='txtfechafin' value='' placeholder='Fecha Fin AAAA-MM-DD' autocomplete='off'>
 
+    <div class='contenedorChkbox'>
+
+      <div class='optChk'>
+        <label class='chkhead'>
+          <input type='checkbox'> Seleccion de Sucursales
+        </label>
+      </div><!--optChk-->
+
+      <div class='gpbChk'>
+        <label class ='chkhead'>
+          <input type='checkbox'> Region Laredo
+        </label>
+      <label>
+        <input type='checkbox'> LDO1
+      </label>
+      </div><!--optChk-->
+
+    </div><!--contenedor chkbox-->
+
     <input type='button' name='btnSubmit' value='Consultar' id='btnSubmit'>
 
   </form>
