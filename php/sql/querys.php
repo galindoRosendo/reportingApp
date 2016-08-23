@@ -98,3 +98,82 @@ function querySucursales(){
 
     return $sql;
 }
+
+/*
+===========================================================
+  Funciones que manejan el reporte de inventario
+===========================================================
+
+function queryItemsInventario($paramsQueryInventarios){
+  $paramsQueryInventarios['items'];
+  $paramsQueryInventarios['fechas'];
+  $paramsQueryInventarios['sucursales'];
+  $sql = "";
+  return $sql;
+}
+
+function llenarHojas($DBQuery){
+  //Variables de inicio
+  $items = $DBQuery['item'];
+  $fechas = $DBQuery['fecha'];
+  $cantidadFechas = count($fechas);
+  $sucs = $DBQuery['sucs'];
+  $formula;
+  $formulaTotal;
+  $hojaActualdeExcel;
+  $columna;
+  $renglon;
+  $celdaActual
+  llenarHojaDB($DBQuery);
+  for ($i=0; $i < count($items); $i++) {
+      llenarHojaVentaItems($items[$i],$fechas,$sucs);
+      $hojaActualdeExcel++;
+  }
+
+}
+
+function llenarHojaDB($DBQuery){
+  //Asignar la primer hoja con php
+  $hojaActualdeExcel = 0;
+
+  //llenar informacion de la base de datos
+
+  //Cambiar de hoja ACTUAL
+  $hojaActualdeExcel++;
+}
+
+function llenarHojaVentaItems($item,$fechas,$sucs){
+  llenarItem($item);
+  llenarFechas($fechas);
+}
+
+function llenarItem($item){
+  //asignar valor con phpexcel a la celda X,Y
+  $celdaActual[$columna][$renglon].valor = $item;
+  $columna++;
+}
+
+function llenarFechas($fechas){
+  for ($j=0; $j < count($fechas); $j++) {
+    $celdaActual=$fecha[$j];
+    $columna++;
+  }
+  $renglon++;
+}
+
+function llenarRenglon($suc,$formula,$cantidadFechas){
+  $celdaActual= $suc;
+  $columna++;
+  for ($k=0; $k < $cantidadFechas; $k++) {
+    $celdaActual=$formula;
+    $columna++;
+  }
+  $renglon++;
+}
+
+function vaciarFormulasTotales($FormulaTotal){
+  //FormulaTotal
+  $celdaActual = $FormulaTotal;
+  $columna++;
+}
+*/

@@ -54,7 +54,7 @@ $("#btnSubmit").click(function(){
   if (tipoBusqueda=='oneday') {
     $.ajax({
     		data: parametros,
-    		url: "http://localhost:8080/reporting.es/php/ajax/oneday.php",
+    		url: "http://localhost:8080/reporting.com/php/ajax/oneday.php",
     		type:'POST',
     		success: function(result){
         $("#resultset").html(result);
@@ -63,7 +63,7 @@ $("#btnSubmit").click(function(){
   }else if (tipoBusqueda=='range') {
     $.ajax({
     		data: parametros,
-    		url: "http://localhost:8080/reporting.es/php/ajax/range.php",
+    		url: "http://localhost:8080/reporting.com/php/ajax/range.php",
     		type:'POST',
     		success: function(result){
         $("#resultset").html(result);
@@ -72,7 +72,7 @@ $("#btnSubmit").click(function(){
   }else if (tipoBusqueda=='rangesum') {
     $.ajax({
     		data: parametros,
-    		url: "http://localhost:8080/reporting.es/php/ajax/rangeSum.php",
+    		url: "http://localhost:8080/reporting.com/php/ajax/rangeSum.php",
     		type:'POST',
     		success: function(result){
         $("#resultset").html(result);
